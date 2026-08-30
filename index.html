@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ViralScript AI</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -61,7 +63,8 @@ header{
   line-height:1.5;
 }
 
-.box,.result{
+.box,
+.result{
   background:#121219;
   border:1px solid #292934;
   border-radius:18px;
@@ -74,7 +77,8 @@ label{
   font-weight:bold;
 }
 
-textarea,select{
+textarea,
+select{
   width:100%;
   background:#09090d;
   color:#fff;
@@ -89,11 +93,8 @@ textarea{
   resize:vertical;
 }
 
-select{
-  cursor:pointer;
-}
-
-.main-btn,.secondary-btn{
+.main-btn,
+.secondary-btn{
   width:100%;
   border:0;
   border-radius:10px;
@@ -114,8 +115,9 @@ select{
   color:#fff;
 }
 
-.main-btn:hover,.secondary-btn:hover{
-  opacity:.9;
+.main-btn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
 }
 
 .counter{
@@ -172,6 +174,7 @@ select{
 }
 
 @media(max-width:600px){
+
   .hero h1{
     font-size:31px;
   }
@@ -179,122 +182,226 @@ select{
   .actions{
     flex-direction:column;
   }
+
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">Viral<span>Script</span> AI</div>
+
+  <div class="logo">
+    Viral<span>Script</span> AI
+  </div>
+
 </header>
+
 
 <div class="container">
 
-  <section class="hero">
-    <h1>
-      Transforme tes idées en
-      <span>scripts TikTok</span> 🚀
-    </h1>
 
-    <p>
-      Crée rapidement des hooks, scripts, textes à l'écran et CTA.
-    </p>
-  </section>
+<section class="hero">
 
-  <div class="box">
+  <h1>
+    Transforme tes idées en
+    <span>scripts TikTok</span> 🚀
+  </h1>
 
-    <div class="counter" id="counter">
-      ⚡ Générations gratuites : 5/5
-    </div>
+  <p>
+    Crée rapidement des hooks, scripts,
+    textes à l'écran et CTA.
+  </p>
 
-    <label for="sujet">📝 Ton sujet</label>
+</section>
 
-    <textarea
-      id="sujet"
-      placeholder="Exemple : Pourquoi les gens préfèrent iPhone ?"
-    ></textarea>
 
-    <label for="type">🎯 Type de contenu</label>
 
-    <select id="type">
-      <option value="Comparaison">Comparaison</option>
-      <option value="Storytelling">Storytelling</option>
-      <option value="Quiz">Quiz</option>
-      <option value="Top 5">Top 5</option>
-      <option value="Information">Information</option>
-    </select>
+<div class="box">
 
-    <label for="duree">⏱️ Durée</label>
 
-    <select id="duree">
-      <option value="30 secondes">30 secondes</option>
-      <option value="45 secondes">45 secondes</option>
-      <option value="60 secondes">60 secondes</option>
-    </select>
+<div class="counter" id="counter">
+  ⚡ Générations gratuites : 5/5
+</div>
 
-    <button class="main-btn" onclick="generer()">
-      🔥 Générer mon script
-    </button>
 
-  </div>
+<label for="sujet">
+  📝 Ton sujet
+</label>
 
-  <div class="result" id="resultat">
 
-    <h2>✨ Ton contenu est prêt</h2>
+<textarea
+  id="sujet"
+  placeholder="Exemple : Pourquoi les gens préfèrent iPhone ?"
+></textarea>
 
-    <h3>🎯 HOOK</h3>
-    <p id="hook"></p>
 
-    <h3>🎙️ SCRIPT</h3>
-    <p id="script"></p>
 
-    <h3>📱 TEXTE À L'ÉCRAN</h3>
-    <p id="ecran"></p>
+<label for="type">
+  🎯 Type de contenu
+</label>
 
-    <h3>🔥 CTA</h3>
-    <p id="cta"></p>
 
-    <div class="actions">
+<select id="type">
 
-      <button
-        class="main-btn"
-        onclick="copierScript()"
-      >
-        📋 Copier
-      </button>
+  <option value="Comparaison">
+    Comparaison
+  </option>
 
-      <button
-        class="secondary-btn"
-        onclick="nouveauScript()"
-      >
-        🔄 Nouveau
-      </button>
+  <option value="Storytelling">
+    Storytelling
+  </option>
 
-    </div>
+  <option value="Quiz">
+    Quiz
+  </option>
 
-  </div>
+  <option value="Top 5">
+    Top 5
+  </option>
 
-  <div class="history">
+  <option value="Information">
+    Information
+  </option>
 
-    <h2>📚 Derniers scripts</h2>
+</select>
 
-    <div id="historique"></div>
 
-  </div>
+
+<label for="duree">
+  ⏱️ Durée
+</label>
+
+
+<select id="duree">
+
+  <option value="30 secondes">
+    30 secondes
+  </option>
+
+  <option value="45 secondes">
+    45 secondes
+  </option>
+
+  <option value="60 secondes">
+    60 secondes
+  </option>
+
+</select>
+
+
+
+<button
+  class="main-btn"
+  id="generateButton"
+  onclick="generer()"
+>
+  🔥 Générer mon script
+</button>
+
 
 </div>
+
+
+
+<div class="result" id="resultat">
+
+
+<h2>
+  ✨ Ton contenu est prêt
+</h2>
+
+
+<h3>
+  🎯 HOOK
+</h3>
+
+<p id="hook"></p>
+
+
+<h3>
+  🎙️ SCRIPT
+</h3>
+
+<p id="script"></p>
+
+
+<h3>
+  📱 TEXTE À L'ÉCRAN
+</h3>
+
+<p id="ecran"></p>
+
+
+<h3>
+  🔥 CTA
+</h3>
+
+<p id="cta"></p>
+
+
+
+<div class="actions">
+
+
+<button
+  class="main-btn"
+  onclick="copierScript()"
+>
+  📋 Copier
+</button>
+
+
+<button
+  class="secondary-btn"
+  onclick="nouveauScript()"
+>
+  🔄 Nouveau
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="history">
+
+<h2>
+  📚 Derniers scripts
+</h2>
+
+<div id="historique"></div>
+
+</div>
+
+
+</div>
+
+
 
 <script>
 
 /* =========================
-   COMPTEUR
+   DATE
 ========================= */
 
-const aujourdHui = new Date().toDateString();
+const aujourdHui =
+  new Date().toDateString();
+
 
 let dateSauvegardee =
-  localStorage.getItem("dateGenerations");
+  localStorage.getItem(
+    "dateGenerations"
+  );
+
+
+/* =========================
+   NOUVELLE JOURNÉE
+========================= */
 
 if(dateSauvegardee !== aujourdHui){
 
@@ -307,234 +414,255 @@ if(dateSauvegardee !== aujourdHui){
     "generations",
     "0"
   );
+
 }
+
+
+/* =========================
+   GENERATIONS
+========================= */
 
 let generations =
   Number(
-    localStorage.getItem("generations")
+    localStorage.getItem(
+      "generations"
+    )
   ) || 0;
 
 
 /* =========================
-   COMPTEUR AFFICHAGE
+   COMPTEUR
 ========================= */
 
 function afficherCompteur(){
 
   const restantes =
-    Math.max(0,5-generations);
+    Math.max(
+      0,
+      5 - generations
+    );
 
-  document.getElementById("counter").textContent =
+  document.getElementById(
+    "counter"
+  ).textContent =
     "⚡ Générations gratuites : "
     + restantes
     + "/5";
+
 }
 
 afficherCompteur();
 
 
 /* =========================
-   GENERATION
+   GENERER AVEC IA
 ========================= */
 
 async function generer(){
 
-  const sujet = document.getElementById("sujet").value.trim();
-  const type = document.getElementById("type").value;
-  const duree = document.getElementById("duree").value;
+  const sujet =
+    document.getElementById(
+      "sujet"
+    ).value.trim();
+
+
+  const type =
+    document.getElementById(
+      "type"
+    ).value;
+
+
+  const duree =
+    document.getElementById(
+      "duree"
+    ).value;
+
+
+  /* Vérification du sujet */
 
   if(sujet === ""){
-    alert("⚠️ Écris d'abord ton sujet.");
+
+    alert(
+      "⚠️ Écris d'abord ton sujet."
+    );
+
     return;
+
   }
 
-  const bouton = document.querySelector(".main-btn");
+
+  /* Vérification limite */
+
+  if(generations >= 5){
+
+    alert(
+      "🚫 Tu as utilisé tes 5 générations gratuites aujourd'hui."
+    );
+
+    return;
+
+  }
+
+
+  const bouton =
+    document.getElementById(
+      "generateButton"
+    );
+
 
   bouton.disabled = true;
-  bouton.textContent = "🤖 L'IA travaille...";
 
-  try {
+  bouton.textContent =
+    "🤖 L'IA travaille...";
 
-    const response = await fetch("/api/generate", {
-      method: "POST",
 
-      headers: {
-        "Content-Type": "application/json"
-      },
+  try{
 
-      body: JSON.stringify({
-        sujet: sujet,
-        type: type,
-        duree: duree
-      })
-    });
 
-    const data = await response.json();
+    /* Appel du backend */
+
+    const response =
+      await fetch(
+        "/api/generate",
+        {
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+
+            sujet:sujet,
+
+            type:type,
+
+            duree:duree
+
+          })
+
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    /* Vérification erreur */
 
     if(!response.ok){
+
       throw new Error(
-        data.error || "Erreur lors de la génération"
+        data.error ||
+        "Erreur du serveur."
       );
+
     }
 
-    const texte = data.result;
 
-    document.getElementById("hook").textContent = "";
-    document.getElementById("script").textContent = texte;
-    document.getElementById("ecran").textContent =
-      "🔥 " + sujet + "\n\n👀 Tu connaissais ça ?\n\n👇 Donne ton avis";
+    /* Résultat IA */
 
-    document.getElementById("cta").textContent =
-      "Abonne-toi pour découvrir d'autres contenus 🔥";
-
-    document.getElementById("resultat").style.display = "block";
-
-  } catch(error) {
-
-    alert("❌ " + error.message);
-
-  } finally {
-
-    bouton.disabled = false;
-    bouton.textContent = "🔥 Générer mon script";
-
-  }
-}
+    const texte =
+      data.result;
 
 
-  let script =
-    "Aujourd'hui, on parle de : "
-    + sujet
-    + ".\n\n";
+    /* Hook */
+
+    document.getElementById(
+      "hook"
+    ).textContent =
+      "Accroche générée par l'IA";
 
 
-  if(type === "Comparaison"){
+    /* Script */
 
-    script +=
-      "D'un côté, une option très populaire. "
-      + "De l'autre, une alternative qui mérite aussi "
-      + "ton attention.\n\n";
-
-    script +=
-      "Mais laquelle est vraiment la meilleure ? "
-      + "Tout dépend de ce que tu recherches.\n\n";
-
-    script +=
-      "Alors, toi, tu choisirais laquelle ?";
-  }
+    document.getElementById(
+      "script"
+    ).textContent =
+      texte;
 
 
-  else if(type === "Storytelling"){
+    /* Texte écran */
 
-    script +=
-      "Tout a commencé avec une question simple : "
+    document.getElementById(
+      "ecran"
+    ).textContent =
+
+      "🔥 "
       + sujet
-      + ".\n\n";
+      + "\n\n"
+      + "👀 Tu connaissais ça ?"
+      + "\n\n"
+      + "👇 Donne ton avis";
 
-    script +=
-      "Personne ne pensait que cette histoire "
-      + "allait devenir aussi intéressante.\n\n";
 
-    script +=
-      "Puis un événement a complètement changé "
-      + "la situation…\n\n";
+    /* CTA */
 
-    script +=
-      "Et c'est là que tout devient intéressant.";
+    document.getElementById(
+      "cta"
+    ).textContent =
+
+      "Abonne-toi pour découvrir "
+      + "d'autres contenus 🔥";
+
+
+    /* Afficher résultat */
+
+    document.getElementById(
+      "resultat"
+    ).style.display =
+      "block";
+
+
+    /* Compter seulement si
+       la génération réussit */
+
+    generations++;
+
+
+    localStorage.setItem(
+      "generations",
+      generations
+    );
+
+
+    afficherCompteur();
+
+
+    /* Sauvegarder */
+
+    sauvegarderHistorique(
+      sujet,
+      type
+    );
+
+
   }
 
+  catch(error){
 
-  else if(type === "Quiz"){
+    console.error(error);
 
-    script +=
-      "Petite question : que sais-tu réellement "
-      + "sur "
-      + sujet
-      + " ?\n\n";
+    alert(
+      "❌ "
+      + error.message
+    );
 
-    script +=
-      "Réfléchis bien avant de répondre.\n\n";
-
-    script +=
-      "Tu as ta réponse ? Alors voyons si tu avais raison.";
   }
 
+  finally{
 
-  else if(type === "Top 5"){
+    bouton.disabled =
+      false;
 
-    script +=
-      "Voici 5 choses que tu dois absolument "
-      + "connaître sur "
-      + sujet
-      + ".\n\n";
+    bouton.textContent =
+      "🔥 Générer mon script";
 
-    script +=
-      "Certaines sont connues, mais la dernière "
-      + "pourrait vraiment te surprendre.\n\n";
-
-    script +=
-      "Et toi, laquelle connaissais-tu déjà ?";
   }
 
-
-  else{
-
-    script +=
-      "Voici ce qu'il faut absolument savoir "
-      + "sur "
-      + sujet
-      + ".\n\n";
-
-    script +=
-      "Beaucoup de personnes ignorent cette information.\n\n";
-
-    script +=
-      "Pourtant, elle peut changer complètement "
-      + "ta façon de voir le sujet.\n\n";
-
-    script +=
-      "Maintenant, tu connais l'essentiel.";
-  }
-
-
-  const texteEcran =
-    "🔥 "
-    + sujet
-    + "\n\n"
-    + "👀 Tu connaissais ça ?"
-    + "\n\n"
-    + "👇 Donne ton avis";
-
-
-  const cta =
-    "Si tu veux d'autres contenus comme celui-ci, "
-    + "abonne-toi et donne ton avis en commentaire. 🔥";
-
-
-  document.getElementById("hook")
-    .textContent = hook;
-
-  document.getElementById("script")
-    .textContent =
-      script
-      + "\n\n⏱️ Durée : "
-      + duree;
-
-  document.getElementById("ecran")
-    .textContent = texteEcran;
-
-  document.getElementById("cta")
-    .textContent = cta;
-
-
-  document.getElementById("resultat")
-    .style.display = "block";
-
-
-  sauvegarderHistorique(
-    sujet,
-    type
-  );
 }
 
 
@@ -545,14 +673,26 @@ async function generer(){
 function copierScript(){
 
   const texte =
+
     "🎯 HOOK\n"
-    + document.getElementById("hook").textContent
+    + document.getElementById(
+        "hook"
+      ).textContent
+
     + "\n\n🎙️ SCRIPT\n"
-    + document.getElementById("script").textContent
+    + document.getElementById(
+        "script"
+      ).textContent
+
     + "\n\n📱 TEXTE À L'ÉCRAN\n"
-    + document.getElementById("ecran").textContent
+    + document.getElementById(
+        "ecran"
+      ).textContent
+
     + "\n\n🔥 CTA\n"
-    + document.getElementById("cta").textContent;
+    + document.getElementById(
+        "cta"
+      ).textContent;
 
 
   navigator.clipboard
@@ -567,10 +707,11 @@ function copierScript(){
     .catch(function(){
 
       alert(
-        "❌ Impossible de copier automatiquement."
+        "❌ Impossible de copier."
       );
 
     });
+
 }
 
 
@@ -580,16 +721,25 @@ function copierScript(){
 
 function nouveauScript(){
 
-  document.getElementById("sujet")
-    .value = "";
+  document.getElementById(
+    "sujet"
+  ).value = "";
 
-  document.getElementById("resultat")
-    .style.display = "none";
+
+  document.getElementById(
+    "resultat"
+  ).style.display =
+    "none";
+
 
   window.scrollTo({
+
     top:0,
+
     behavior:"smooth"
+
   });
+
 }
 
 
@@ -604,71 +754,108 @@ function sauvegarderHistorique(
 
   let historique =
     JSON.parse(
-      localStorage.getItem("historique")
+      localStorage.getItem(
+        "historique"
+      )
     ) || [];
 
 
   historique.unshift({
+
     sujet:sujet,
+
     type:type
+
   });
 
 
   historique =
-    historique.slice(0,5);
+    historique.slice(
+      0,
+      5
+    );
 
 
   localStorage.setItem(
+
     "historique",
-    JSON.stringify(historique)
+
+    JSON.stringify(
+      historique
+    )
+
   );
 
 
   afficherHistorique();
+
 }
 
+
+/* =========================
+   AFFICHER HISTORIQUE
+========================= */
 
 function afficherHistorique(){
 
   const zone =
-    document.getElementById("historique");
+    document.getElementById(
+      "historique"
+    );
 
 
   let historique =
     JSON.parse(
-      localStorage.getItem("historique")
+
+      localStorage.getItem(
+        "historique"
+      )
+
     ) || [];
 
 
-  if(historique.length === 0){
+  if(
+    historique.length === 0
+  ){
 
     zone.innerHTML =
-      "<p style='color:#777'>Aucun script pour le moment.</p>";
+      "<p style='color:#777'>"
+      + "Aucun script pour le moment."
+      + "</p>";
 
     return;
+
   }
 
 
   zone.innerHTML = "";
 
 
-  historique.forEach(function(item){
+  historique.forEach(
+    function(item){
 
-    const div =
-      document.createElement("div");
+      const div =
+        document.createElement(
+          "div"
+        );
 
-    div.className =
-      "history-item";
 
-    div.textContent =
-      "🎬 "
-      + item.sujet
-      + " — "
-      + item.type;
+      div.className =
+        "history-item";
 
-    zone.appendChild(div);
 
-  });
+      div.textContent =
+        "🎬 "
+        + item.sujet
+        + " — "
+        + item.type;
+
+
+      zone.appendChild(div);
+
+    }
+  );
+
 }
 
 
@@ -676,5 +863,6 @@ afficherHistorique();
 
 </script>
 
+
 </body>
-  </html>
+</html>
