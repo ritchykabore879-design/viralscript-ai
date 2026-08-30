@@ -196,11 +196,27 @@ placeholder="Exemple : Pourquoi les gens préfèrent iPhone ?"></textarea>
 
 <script>
 
-function generer(){
-let generations = 0;
-if(generations >= 5){
+const aujourdHui = new Date().toDateString();
+const dateSauvegardee = localStorage.getItem("dateGenerations");
+
+if (dateSauvegardee !== aujourdHui) {
+  localStorage.setItem("dateGenerations", aujourdHui);
+  localStorage.setItem("generations", "0");
+}
+
+let generations = Number(localStorage.getItem("generations")) || 0;
+
+if (generations >= 5) {
   alert("🚫 Tu as utilisé tes 5 générations gratuites aujourd'hui.");
   return;
+}
+
+generations++;
+
+localStorage.setItem("generations", generations);
+
+document.getElementById("compteur").textContent =
+  "⚡ Générations gratuites : " + (5 - generations) + "/5";
 }
 
 generations++;
