@@ -1,143 +1,266 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ViralScript AI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<title>ViralScript AI</title>
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #0b0b0f;
-      color: white;
-      min-height: 100vh;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
+body{
+  font-family:Arial,sans-serif;
+  background:#0b0b0f;
+  color:white;
+  min-height:100vh;
+}
 
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-    }
+header{
+  padding:20px;
+  text-align:center;
+  border-bottom:1px solid #292934;
+}
 
-    .logo span {
-      color: #8b5cf6;
-    }
+.logo{
+  font-size:25px;
+  font-weight:bold;
+}
 
-    .btn {
-      background: #8b5cf6;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.logo span{
+  color:#8b5cf6;
+}
 
-    .hero {
-      text-align: center;
-      padding: 100px 20px;
-      max-width: 850px;
-      margin: auto;
-    }
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:40px 20px;
+}
 
-    .hero h1 {
-      font-size: 55px;
-      line-height: 1.1;
-      margin-bottom: 25px;
-    }
+h1{
+  text-align:center;
+  font-size:35px;
+  margin-bottom:10px;
+}
 
-    .hero h1 span {
-      color: #8b5cf6;
-    }
+.subtitle{
+  text-align:center;
+  color:#aaa;
+  margin-bottom:35px;
+}
 
-    .hero p {
-      font-size: 19px;
-      color: #b5b5bd;
-      margin-bottom: 35px;
-    }
+.box{
+  background:#15151c;
+  border:1px solid #292934;
+  border-radius:18px;
+  padding:25px;
+}
 
-    .features {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      padding: 20px;
-    }
+label{
+  display:block;
+  margin-bottom:8px;
+  font-weight:bold;
+}
 
-    .card {
-      background: #15151c;
-      border: 1px solid #292934;
-      padding: 20px;
-      border-radius: 15px;
-      width: 220px;
-    }
+input,select,textarea{
+  width:100%;
+  background:#0d0d12;
+  color:white;
+  border:1px solid #33333f;
+  border-radius:10px;
+  padding:14px;
+  margin-bottom:20px;
+  font-size:16px;
+}
 
-    .card h3 {
-      margin-bottom: 10px;
-    }
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
 
-    .card p {
-      color: #aaa;
-      font-size: 14px;
-    }
-  </style>
+button{
+  width:100%;
+  background:#8b5cf6;
+  color:white;
+  border:none;
+  padding:15px;
+  border-radius:10px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+.result{
+  display:none;
+  margin-top:25px;
+  background:#15151c;
+  border:1px solid #292934;
+  border-radius:18px;
+  padding:25px;
+}
+
+.result h2{
+  margin-bottom:15px;
+}
+
+.result h3{
+  margin-top:20px;
+  margin-bottom:8px;
+  color:#a78bfa;
+}
+
+.result p{
+  line-height:1.6;
+  color:#ddd;
+  white-space:pre-line;
+}
+</style>
 </head>
 
 <body>
 
-  <nav>
-    <div class="logo">Viral<span>Script</span> AI</div>
-    <button class="btn">Commencer</button>
-  </nav>
+<header>
+  <div class="logo">Viral<span>Script</span> AI</div>
+</header>
 
-  <section class="hero">
-    <h1>
-      Transforme tes idées en
-      <span>scripts TikTok</span>
-    </h1>
+<div class="container">
 
-    <p>
-      Génère rapidement des hooks, scripts, CTA et textes
-      adaptés aux vidéos courtes.
-    </p>
+<h1>Crée ton script TikTok 🚀</h1>
 
-    <button class="btn">
-      🚀 Créer mon premier script
-    </button>
-  </section>
+<p class="subtitle">
+Transforme une simple idée en contenu captivant.
+</p>
 
-  <section class="features">
+<div class="box">
 
-    <div class="card">
-      <h3>🎯 Hooks</h3>
-      <p>Des débuts captivants pour retenir l'attention.</p>
-    </div>
+<label>Ton sujet</label>
 
-    <div class="card">
-      <h3>🎙️ Scripts</h3>
-      <p>Des scripts adaptés aux vidéos courtes.</p>
-    </div>
+<textarea id="sujet"
+placeholder="Exemple : Pourquoi les gens préfèrent iPhone ?"></textarea>
 
-    <div class="card">
-      <h3>🔥 CTA</h3>
-      <p>Des appels à l'action pour encourager l'engagement.</p>
-    </div>
+<label>Type de contenu</label>
 
-  </section>
+<select id="type">
+<option>Comparaison</option>
+<option>Storytelling</option>
+<option>Quiz</option>
+<option>Top 5</option>
+<option>Information</option>
+</select>
+
+<label>Durée</label>
+
+<select id="duree">
+<option>30 secondes</option>
+<option>45 secondes</option>
+<option>60 secondes</option>
+</select>
+
+<button onclick="generer()">
+🔥 Générer mon script
+</button>
+
+</div>
+
+<div class="result" id="resultat">
+
+<h2>✨ Ton script</h2>
+
+<h3>🎯 HOOK</h3>
+<p id="hook"></p>
+
+<h3>🎙️ SCRIPT</h3>
+<p id="script"></p>
+
+<h3>📱 TEXTE À L'ÉCRAN</h3>
+<p id="ecran"></p>
+
+<h3>🔥 CTA</h3>
+<p id="cta"></p>
+
+</div>
+
+</div>
+
+<script>
+
+function generer(){
+
+const sujet=document.getElementById("sujet").value.trim();
+const type=document.getElementById("type").value;
+const duree=document.getElementById("duree").value;
+
+if(sujet===""){
+alert("Écris d'abord ton sujet 🔥");
+return;
+}
+
+let hook="Tu pensais tout savoir sur "+sujet+" ? Attends de voir ça… 👀";
+
+let script="Aujourd'hui, on parle de : "+sujet+".\n\n";
+
+if(type==="Comparaison"){
+script+="D'un côté, tu as une option très populaire. De l'autre, une alternative qui possède aussi de sérieux avantages.\n\n";
+script+="Mais le plus intéressant, c'est que le meilleur choix dépend surtout de ce que tu recherches.\n\n";
+script+="Alors, laquelle choisirais-tu ?";
+}
+
+else if(type==="Storytelling"){
+script+="Au début, personne ne pensait que cette histoire allait devenir intéressante.\n\n";
+script+="Tout a commencé avec une simple question : "+sujet+".\n\n";
+script+="Puis les choses ont complètement changé…\n\n";
+script+="Et c'est là que ça devient vraiment intéressant.";
+
+}
+
+else if(type==="Quiz"){
+script+="Question : que sais-tu réellement sur "+sujet+" ?\n\n";
+script+="Tu as quelques secondes pour réfléchir avant de choisir ta réponse.\n\n";
+script+="Alors, tu avais trouvé ?";
+
+}
+
+else if(type==="Top 5"){
+script+="Voici les 5 choses les plus intéressantes à connaître sur "+sujet+".\n\n";
+script+="Numéro 5 : un détail que beaucoup de personnes ignorent.\n\n";
+script+="Numéro 3 : celui-ci pourrait vraiment te surprendre.\n\n";
+script+="Et le numéro 1 est probablement celui dont tu te souviendras le plus.";
+
+}
+
+else{
+script+="Voici ce qu'il faut absolument savoir sur "+sujet+".\n\n";
+script+="Beaucoup de personnes passent à côté de cette information.\n\n";
+script+="Pourtant, elle peut complètement changer la manière dont tu vois le sujet.\n\n";
+script+="Maintenant, tu connais l'essentiel.";
+}
+
+document.getElementById("hook").textContent=hook;
+
+document.getElementById("script").textContent=
+script+"\n\n⏱️ Format : "+duree;
+
+document.getElementById("ecran").textContent=
+"🔥 "+sujet+"\n\n"+
+"👀 Tu connaissais ça ?\n\n"+
+"👇 Donne ton avis";
+
+document.getElementById("cta").textContent=
+"Si tu veux d'autres contenus comme celui-ci, abonne-toi et dis-moi ton avis en commentaire. 🔥";
+
+document.getElementById("resultat").style.display="block";
+
+}
+
+</script>
 
 </body>
 </html>
