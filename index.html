@@ -197,8 +197,7 @@ placeholder="Exemple : Pourquoi les gens préfèrent iPhone ?"></textarea>
 <script>
 
 function generer(){
-let generations = Number(localStorage.getItem("generations")) || 0;
-
+let generations = 0;
 if(generations >= 5){
   alert("🚫 Tu as utilisé tes 5 générations gratuites aujourd'hui.");
   return;
