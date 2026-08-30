@@ -1,75 +1,667 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ViralScript AI</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#08080c;
+  color:#fff;
+  min-height:100vh;
+}
+
+header{
+  padding:20px;
+  border-bottom:1px solid #25252f;
+  text-align:center;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.logo span{
+  color:#8b5cf6;
+}
+
+.container{
+  width:100%;
+  max-width:760px;
+  margin:auto;
+  padding:35px 18px;
+}
+
+.hero{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.hero h1{
+  font-size:38px;
+  line-height:1.15;
+  margin-bottom:12px;
+}
+
+.hero h1 span{
+  color:#8b5cf6;
+}
+
+.hero p{
+  color:#aaa;
+  line-height:1.5;
+}
+
+.box,.result{
+  background:#121219;
+  border:1px solid #292934;
+  border-radius:18px;
+  padding:22px;
+}
+
+label{
+  display:block;
+  margin:18px 0 8px;
+  font-weight:bold;
+}
+
+textarea,select{
+  width:100%;
+  background:#09090d;
+  color:#fff;
+  border:1px solid #343440;
+  border-radius:10px;
+  padding:14px;
+  font-size:16px;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+select{
+  cursor:pointer;
+}
+
+.main-btn,.secondary-btn{
+  width:100%;
+  border:0;
+  border-radius:10px;
+  padding:15px;
+  margin-top:20px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.main-btn{
+  background:#8b5cf6;
+  color:#fff;
+}
+
+.secondary-btn{
+  background:#252531;
+  color:#fff;
+}
+
+.main-btn:hover,.secondary-btn:hover{
+  opacity:.9;
+}
+
+.counter{
+  text-align:center;
+  color:#a78bfa;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+.result{
+  display:none;
+  margin-top:25px;
+}
+
+.result h2{
+  margin-bottom:20px;
+}
+
+.result h3{
+  color:#a78bfa;
+  margin:18px 0 8px;
+}
+
+.result p{
+  color:#ddd;
+  line-height:1.6;
+  white-space:pre-line;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+}
+
+.actions button{
+  flex:1;
+}
+
+.history{
+  margin-top:25px;
+}
+
+.history h2{
+  margin-bottom:12px;
+}
+
+.history-item{
+  background:#121219;
+  border:1px solid #292934;
+  padding:14px;
+  border-radius:10px;
+  margin-top:8px;
+  color:#ccc;
+}
+
+@media(max-width:600px){
+  .hero h1{
+    font-size:31px;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Viral<span>Script</span> AI</div>
+</header>
+
+<div class="container">
+
+  <section class="hero">
+    <h1>
+      Transforme tes idées en
+      <span>scripts TikTok</span> 🚀
+    </h1>
+
+    <p>
+      Crée rapidement des hooks, scripts, textes à l'écran et CTA.
+    </p>
+  </section>
+
+  <div class="box">
+
+    <div class="counter" id="counter">
+      ⚡ Générations gratuites : 5/5
+    </div>
+
+    <label for="sujet">📝 Ton sujet</label>
+
+    <textarea
+      id="sujet"
+      placeholder="Exemple : Pourquoi les gens préfèrent iPhone ?"
+    ></textarea>
+
+    <label for="type">🎯 Type de contenu</label>
+
+    <select id="type">
+      <option value="Comparaison">Comparaison</option>
+      <option value="Storytelling">Storytelling</option>
+      <option value="Quiz">Quiz</option>
+      <option value="Top 5">Top 5</option>
+      <option value="Information">Information</option>
+    </select>
+
+    <label for="duree">⏱️ Durée</label>
+
+    <select id="duree">
+      <option value="30 secondes">30 secondes</option>
+      <option value="45 secondes">45 secondes</option>
+      <option value="60 secondes">60 secondes</option>
+    </select>
+
+    <button class="main-btn" onclick="generer()">
+      🔥 Générer mon script
+    </button>
+
+  </div>
+
+  <div class="result" id="resultat">
+
+    <h2>✨ Ton contenu est prêt</h2>
+
+    <h3>🎯 HOOK</h3>
+    <p id="hook"></p>
+
+    <h3>🎙️ SCRIPT</h3>
+    <p id="script"></p>
+
+    <h3>📱 TEXTE À L'ÉCRAN</h3>
+    <p id="ecran"></p>
+
+    <h3>🔥 CTA</h3>
+    <p id="cta"></p>
+
+    <div class="actions">
+
+      <button
+        class="main-btn"
+        onclick="copierScript()"
+      >
+        📋 Copier
+      </button>
+
+      <button
+        class="secondary-btn"
+        onclick="nouveauScript()"
+      >
+        🔄 Nouveau
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="history">
+
+    <h2>📚 Derniers scripts</h2>
+
+    <div id="historique"></div>
+
+  </div>
+
+</div>
+
 <script>
+
+/* =========================
+   COMPTEUR
+========================= */
+
+const aujourdHui = new Date().toDateString();
+
+let dateSauvegardee =
+  localStorage.getItem("dateGenerations");
+
+if(dateSauvegardee !== aujourdHui){
+
+  localStorage.setItem(
+    "dateGenerations",
+    aujourdHui
+  );
+
+  localStorage.setItem(
+    "generations",
+    "0"
+  );
+}
+
+let generations =
+  Number(
+    localStorage.getItem("generations")
+  ) || 0;
+
+
+/* =========================
+   COMPTEUR AFFICHAGE
+========================= */
+
+function afficherCompteur(){
+
+  const restantes =
+    Math.max(0,5-generations);
+
+  document.getElementById("counter").textContent =
+    "⚡ Générations gratuites : "
+    + restantes
+    + "/5";
+}
+
+afficherCompteur();
+
+
+/* =========================
+   GENERATION
+========================= */
 
 function generer(){
 
-  const sujet = document.getElementById("sujet").value.trim();
-  const type = document.getElementById("type").value;
-  const duree = document.getElementById("duree").value;
+  const sujet =
+    document.getElementById("sujet")
+    .value
+    .trim();
+
+  const type =
+    document.getElementById("type")
+    .value;
+
+  const duree =
+    document.getElementById("duree")
+    .value;
+
 
   if(sujet === ""){
-    alert("Écris d'abord ton sujet 🔥");
+
+    alert(
+      "⚠️ Écris d'abord ton sujet."
+    );
+
     return;
   }
 
-  let hook = "Tu pensais tout savoir sur " + sujet + " ? Attends de voir ça… 👀";
 
-  let script = "Aujourd'hui, on parle de : " + sujet + ".\n\n";
+  if(generations >= 5){
+
+    alert(
+      "🚫 Tu as utilisé tes 5 générations gratuites aujourd'hui."
+    );
+
+    return;
+  }
+
+
+  generations++;
+
+  localStorage.setItem(
+    "generations",
+    generations
+  );
+
+  afficherCompteur();
+
+
+  let hook =
+    "Tu pensais tout savoir sur "
+    + sujet
+    + " ? Attends de voir ça… 👀";
+
+
+  let script =
+    "Aujourd'hui, on parle de : "
+    + sujet
+    + ".\n\n";
+
 
   if(type === "Comparaison"){
-    script += "D'un côté, tu as une option très populaire. De l'autre, une alternative qui possède aussi de sérieux avantages.\n\n";
-    script += "Mais le meilleur choix dépend surtout de ce que tu recherches.\n\n";
-    script += "Alors, laquelle choisirais-tu ?";
+
+    script +=
+      "D'un côté, une option très populaire. "
+      + "De l'autre, une alternative qui mérite aussi "
+      + "ton attention.\n\n";
+
+    script +=
+      "Mais laquelle est vraiment la meilleure ? "
+      + "Tout dépend de ce que tu recherches.\n\n";
+
+    script +=
+      "Alors, toi, tu choisirais laquelle ?";
   }
+
 
   else if(type === "Storytelling"){
-    script += "Au début, personne ne pensait que cette histoire allait devenir intéressante.\n\n";
-    script += "Tout a commencé avec une simple question : " + sujet + ".\n\n";
-    script += "Puis les choses ont complètement changé…";
+
+    script +=
+      "Tout a commencé avec une question simple : "
+      + sujet
+      + ".\n\n";
+
+    script +=
+      "Personne ne pensait que cette histoire "
+      + "allait devenir aussi intéressante.\n\n";
+
+    script +=
+      "Puis un événement a complètement changé "
+      + "la situation…\n\n";
+
+    script +=
+      "Et c'est là que tout devient intéressant.";
   }
+
 
   else if(type === "Quiz"){
-    script += "Question : que sais-tu réellement sur " + sujet + " ?\n\n";
-    script += "Tu as quelques secondes pour réfléchir.\n\n";
-    script += "Alors, tu avais trouvé ?";
+
+    script +=
+      "Petite question : que sais-tu réellement "
+      + "sur "
+      + sujet
+      + " ?\n\n";
+
+    script +=
+      "Réfléchis bien avant de répondre.\n\n";
+
+    script +=
+      "Tu as ta réponse ? Alors voyons si tu avais raison.";
   }
+
 
   else if(type === "Top 5"){
-    script += "Voici 5 choses que tu dois connaître sur " + sujet + ".\n\n";
-    script += "Et la dernière pourrait vraiment te surprendre.";
+
+    script +=
+      "Voici 5 choses que tu dois absolument "
+      + "connaître sur "
+      + sujet
+      + ".\n\n";
+
+    script +=
+      "Certaines sont connues, mais la dernière "
+      + "pourrait vraiment te surprendre.\n\n";
+
+    script +=
+      "Et toi, laquelle connaissais-tu déjà ?";
   }
+
 
   else{
-    script += "Voici ce qu'il faut absolument savoir sur " + sujet + ".\n\n";
-    script += "Beaucoup de personnes ignorent cette information.\n\n";
-    script += "Maintenant, tu connais l'essentiel.";
+
+    script +=
+      "Voici ce qu'il faut absolument savoir "
+      + "sur "
+      + sujet
+      + ".\n\n";
+
+    script +=
+      "Beaucoup de personnes ignorent cette information.\n\n";
+
+    script +=
+      "Pourtant, elle peut changer complètement "
+      + "ta façon de voir le sujet.\n\n";
+
+    script +=
+      "Maintenant, tu connais l'essentiel.";
   }
 
-  document.getElementById("hook").textContent = hook;
 
-  document.getElementById("script").textContent =
-    script + "\n\n⏱️ Format : " + duree;
+  const texteEcran =
+    "🔥 "
+    + sujet
+    + "\n\n"
+    + "👀 Tu connaissais ça ?"
+    + "\n\n"
+    + "👇 Donne ton avis";
 
-  document.getElementById("ecran").textContent =
-    "🔥 " + sujet + "\n\n👀 Tu connaissais ça ?\n\n👇 Donne ton avis";
 
-  document.getElementById("cta").textContent =
-    "Si tu veux d'autres contenus comme celui-ci, abonne-toi et donne ton avis en commentaire. 🔥";
+  const cta =
+    "Si tu veux d'autres contenus comme celui-ci, "
+    + "abonne-toi et donne ton avis en commentaire. 🔥";
 
-  document.getElementById("resultat").style.display = "block";
+
+  document.getElementById("hook")
+    .textContent = hook;
+
+  document.getElementById("script")
+    .textContent =
+      script
+      + "\n\n⏱️ Durée : "
+      + duree;
+
+  document.getElementById("ecran")
+    .textContent = texteEcran;
+
+  document.getElementById("cta")
+    .textContent = cta;
+
+
+  document.getElementById("resultat")
+    .style.display = "block";
+
+
+  sauvegarderHistorique(
+    sujet,
+    type
+  );
 }
 
+
+/* =========================
+   COPIER
+========================= */
 
 function copierScript(){
 
   const texte =
-    "🎯 HOOK\n" + document.getElementById("hook").textContent +
-    "\n\n🎙️ SCRIPT\n" + document.getElementById("script").textContent +
-    "\n\n📱 TEXTE À L'ÉCRAN\n" + document.getElementById("ecran").textContent +
-    "\n\n🔥 CTA\n" + document.getElementById("cta").textContent;
+    "🎯 HOOK\n"
+    + document.getElementById("hook").textContent
+    + "\n\n🎙️ SCRIPT\n"
+    + document.getElementById("script").textContent
+    + "\n\n📱 TEXTE À L'ÉCRAN\n"
+    + document.getElementById("ecran").textContent
+    + "\n\n🔥 CTA\n"
+    + document.getElementById("cta").textContent;
 
-  navigator.clipboard.writeText(texte);
 
-  alert("✅ Script copié !");
+  navigator.clipboard
+    .writeText(texte)
+    .then(function(){
+
+      alert(
+        "✅ Script copié !"
+      );
+
+    })
+    .catch(function(){
+
+      alert(
+        "❌ Impossible de copier automatiquement."
+      );
+
+    });
 }
 
-    </script>
+
+/* =========================
+   NOUVEAU SCRIPT
+========================= */
+
+function nouveauScript(){
+
+  document.getElementById("sujet")
+    .value = "";
+
+  document.getElementById("resultat")
+    .style.display = "none";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+/* =========================
+   HISTORIQUE
+========================= */
+
+function sauvegarderHistorique(
+  sujet,
+  type
+){
+
+  let historique =
+    JSON.parse(
+      localStorage.getItem("historique")
+    ) || [];
+
+
+  historique.unshift({
+    sujet:sujet,
+    type:type
+  });
+
+
+  historique =
+    historique.slice(0,5);
+
+
+  localStorage.setItem(
+    "historique",
+    JSON.stringify(historique)
+  );
+
+
+  afficherHistorique();
+}
+
+
+function afficherHistorique(){
+
+  const zone =
+    document.getElementById("historique");
+
+
+  let historique =
+    JSON.parse(
+      localStorage.getItem("historique")
+    ) || [];
+
+
+  if(historique.length === 0){
+
+    zone.innerHTML =
+      "<p style='color:#777'>Aucun script pour le moment.</p>";
+
+    return;
+  }
+
+
+  zone.innerHTML = "";
+
+
+  historique.forEach(function(item){
+
+    const div =
+      document.createElement("div");
+
+    div.className =
+      "history-item";
+
+    div.textContent =
+      "🎬 "
+      + item.sujet
+      + " — "
+      + item.type;
+
+    zone.appendChild(div);
+
+  });
+}
+
+
+afficherHistorique();
+
+</script>
+
+</body>
+  </html>
