@@ -140,7 +140,9 @@ Transforme une simple idée en contenu captivant.
 </p>
 
 <div class="box">
-
+<div id="compteur" style="text-align:center; margin-bottom:20px; color:#a78bfa; font-weight:bold;">
+⚡ Générations gratuites : 5/5
+</div>
 <label>Ton sujet</label>
 
 <textarea id="sujet"
@@ -207,7 +209,8 @@ localStorage.setItem("generations", generations);
 const sujet=document.getElementById("sujet").value.trim();
 const type=document.getElementById("type").value;
 const duree=document.getElementById("duree").value;
-
+document.getElementById("compteur").textContent =
+"⚡ Générations gratuites : " + (5 - generations) + "/5";
 if(sujet===""){
 alert("Écris d'abord ton sujet 🔥");
 return;
