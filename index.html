@@ -185,7 +185,9 @@ placeholder="Exemple : Pourquoi les gens préfèrent iPhone ?"></textarea>
 
 <h3>🔥 CTA</h3>
 <p id="cta"></p>
-
+<button onclick="copierScript()" style="margin-top:20px;">
+📋 Copier le script
+</button>
 </div>
 
 </div>
@@ -258,6 +260,22 @@ document.getElementById("cta").textContent=
 
 document.getElementById("resultat").style.display="block";
 
+}function copierScript(){
+
+const hook = document.getElementById("hook").textContent;
+const script = document.getElementById("script").textContent;
+const ecran = document.getElementById("ecran").textContent;
+const cta = document.getElementById("cta").textContent;
+
+const texte =
+"🎯 HOOK\n" + hook +
+"\n\n🎙️ SCRIPT\n" + script +
+"\n\n📱 TEXTE À L'ÉCRAN\n" + ecran +
+"\n\n🔥 CTA\n" + cta;
+
+navigator.clipboard.writeText(texte);
+
+alert("✅ Script copié !");
 }
 
 </script>
