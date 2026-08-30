@@ -337,56 +337,69 @@ afficherCompteur();
    GENERATION
 ========================= */
 
-function generer(){
+async function generer(){
 
-  const sujet =
-    document.getElementById("sujet")
-    .value
-    .trim();
-
-  const type =
-    document.getElementById("type")
-    .value;
-
-  const duree =
-    document.getElementById("duree")
-    .value;
-
+  const sujet = document.getElementById("sujet").value.trim();
+  const type = document.getElementById("type").value;
+  const duree = document.getElementById("duree").value;
 
   if(sujet === ""){
-
-    alert(
-      "⚠️ Écris d'abord ton sujet."
-    );
-
+    alert("⚠️ Écris d'abord ton sujet.");
     return;
   }
 
+  const bouton = document.querySelector(".main-btn");
 
-  if(generations >= 5){
+  bouton.disabled = true;
+  bouton.textContent = "🤖 L'IA travaille...";
 
-    alert(
-      "🚫 Tu as utilisé tes 5 générations gratuites aujourd'hui."
-    );
+  try {
 
-    return;
+    const response = await fetch("/api/generate", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        sujet: sujet,
+        type: type,
+        duree: duree
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(
+        data.error || "Erreur lors de la génération"
+      );
+    }
+
+    const texte = data.result;
+
+    document.getElementById("hook").textContent = "";
+    document.getElementById("script").textContent = texte;
+    document.getElementById("ecran").textContent =
+      "🔥 " + sujet + "\n\n👀 Tu connaissais ça ?\n\n👇 Donne ton avis";
+
+    document.getElementById("cta").textContent =
+      "Abonne-toi pour découvrir d'autres contenus 🔥";
+
+    document.getElementById("resultat").style.display = "block";
+
+  } catch(error) {
+
+    alert("❌ " + error.message);
+
+  } finally {
+
+    bouton.disabled = false;
+    bouton.textContent = "🔥 Générer mon script";
+
   }
-
-
-  generations++;
-
-  localStorage.setItem(
-    "generations",
-    generations
-  );
-
-  afficherCompteur();
-
-
-  let hook =
-    "Tu pensais tout savoir sur "
-    + sujet
-    + " ? Attends de voir ça… 👀";
+}
 
 
   let script =
